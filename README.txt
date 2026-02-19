@@ -1,30 +1,90 @@
-Dimension by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+# 👋 Olá, eu sou o Raony Lino
 
+🎯 Desenvolvedor Mobile com foco em Flutter
+🎓 Bacharel em Ciência da Computação – PUC Minas
+📍 Brasil
 
-This is Dimension, a fun little one-pager with modal-ized (is that a word?) "pages"
-and a cool depth effect (click on a menu item to see what I mean). Simple, fully
-responsive, and kitted out with all the usual pre-styled elements you'd expect.
-Hope you dig it :)
+---
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+## 🚀 Sobre mim
 
-(* = not included)
+Sou desenvolvedor Mobile especializado em **Flutter**, com experiência no desenvolvimento de aplicações multiplataforma (Android e iOS), aplicando boas práticas de arquitetura, organização e escalabilidade.
 
-AJ
-aj@lkn.io | @ajlkn
+Tenho foco em construir aplicações performáticas, bem estruturadas e com excelente experiência para o usuário. Trabalho com consumo de APIs, persistência local, integração com serviços externos e organização de projetos utilizando padrões modernos de arquitetura.
 
+Estou sempre em evolução técnica e busco desafios que me permitam crescer como profissional e contribuir estrategicamente para os produtos em que atuo.
 
-Credits:
+---
 
-	Demo Images:
-		Unsplash (unsplash.com)
+## 🛠️ Tecnologias e Ferramentas
 
-	Icons:
-		Font Awesome (fontawesome.io)
+### 📱 Mobile
+- Flutter
+- Dart
+- Android / iOS
+- Publicação na Play Store e App Store
 
-	Other:
-		jQuery (jquery.com)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+### 🏗️ Arquitetura & Padrões
+- Clean Architecture
+- Bloc / Cubit
+- Repository Pattern
+- SOLID
+- Versionamento Semântico
+
+### 🔗 Backend & Integrações
+- Consumo de APIs REST
+- Firebase (Auth, Firestore, FCM)
+- Upload de imagens (Base64 / S3)
+- Dio (HTTP Client)
+
+### 💾 Banco de Dados
+- SQLite (offline-first)
+- Cloud Firestore
+
+### 🔧 Ferramentas
+- Git & GitHub
+- Postman
+- Figma (interpretação de layout)
+- VS Code / Android Studio / Xcode
+
+---
+
+## 📂 Projetos em Destaque
+
+Aqui você encontrará projetos que demonstram:
+
+- Integração com APIs
+- Gerenciamento de estado
+- Arquitetura escalável
+- Persistência local
+- Autenticação de usuários
+- Upload e sincronização de dados
+- Boas práticas de código
+
+*(Explore os repositórios fixados no meu perfil 👇)*
+
+---
+
+## 📈 Atualmente estudando
+
+- Aprimoramento em arquitetura avançada Flutter
+- Performance e otimização
+- React & Next.js
+- Boas práticas de CI/CD
+
+---
+
+## 🤝 Vamos conversar?
+
+Estou aberto a oportunidades como:
+
+- Desenvolvedor Mobile Flutter
+- Desenvolvedor Mobile Pleno
+- Mobile / Front-end
+
+📫 Conecte-se comigo no LinkedIn
+📧 Entre em contato para oportunidades e parcerias
+
+---
+
+⭐ Se gostar de algum projeto, fique à vontade para dar uma estrela!
