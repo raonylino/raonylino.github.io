@@ -1,5 +1,75 @@
 (function () {
   const projetos = window.PROJETOS || [];
+  const translations = window.PORTFOLIO_I18N || {};
+  const english = translations.en || {};
+  let language = localStorage.getItem('portfolio-language') === 'en' ? 'en' : 'pt';
+
+  function text(key) {
+    return translations[language]?.ui?.[key] || key;
+  }
+
+  function localizedProject(projeto) {
+    if (language !== 'en') return projeto;
+    return { ...projeto, ...(english.projects?.[projeto.id] || {}) };
+  }
+
+  function applyTranslations() {
+    document.documentElement.lang = language === 'en' ? 'en' : 'pt-BR';
+
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      if (!Object.hasOwn(element.dataset, 'ptText')) element.dataset.ptText = element.textContent;
+      const key = element.dataset.i18n;
+      element.textContent = language === 'en' ? (english.ui?.[key] || element.dataset.ptText) : element.dataset.ptText;
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach((element) => {
+      if (!Object.hasOwn(element.dataset, 'ptHtml')) element.dataset.ptHtml = element.innerHTML;
+      const key = element.dataset.i18nHtml;
+      element.innerHTML = language === 'en' ? (english.experience?.[key] || element.dataset.ptHtml) : element.dataset.ptHtml;
+    });
+
+    document.querySelectorAll('[data-i18n-aria-label]').forEach((element) => {
+      if (!Object.hasOwn(element.dataset, 'ptAriaLabel')) element.dataset.ptAriaLabel = element.getAttribute('aria-label') || '';
+      const key = element.dataset.i18nAriaLabel;
+      element.setAttribute('aria-label', language === 'en' ? (english.ui?.[key] || element.dataset.ptAriaLabel) : element.dataset.ptAriaLabel);
+    });
+
+    document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
+      if (!Object.hasOwn(element.dataset, 'ptAlt')) element.dataset.ptAlt = element.getAttribute('alt') || '';
+      const key = element.dataset.i18nAlt;
+      element.setAttribute('alt', language === 'en' ? (english.ui?.[key] || element.dataset.ptAlt) : element.dataset.ptAlt);
+    });
+
+    document.querySelectorAll('[data-language]').forEach((button) => {
+      const active = button.dataset.language === language;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+
+    const title = text('pageTitle');
+    document.title = title;
+    const description = document.querySelector('meta[name="description"]');
+    if (description) description.setAttribute('content', text('pageDescription'));
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) ogDescription.setAttribute('content', text('pageDescription'));
+  }
+
+  function initLanguageSwitch() {
+    document.querySelectorAll('[data-language]').forEach((button) => {
+      button.addEventListener('click', () => {
+        language = button.dataset.language === 'en' ? 'en' : 'pt';
+        localStorage.setItem('portfolio-language', language);
+        applyTranslations();
+        initTypewriter();
+        renderFeaturedProjects();
+        const activeFilter = document.querySelector('.filter-button.is-active')?.dataset.filter || 'all';
+        renderProjectGrid(activeFilter);
+        renderProjectDetail();
+      });
+    });
+  }
 
   function setActiveFilter(filter) {
     const buttons = document.querySelectorAll('.filter-button');
@@ -11,17 +81,18 @@
   }
 
   function createCardMarkup(projeto) {
+    projeto = localizedProject(projeto);
     const tags = (projeto.tags || []).slice(0, 3).map((tag) => `<li>${tag}</li>`).join('');
     const media = projeto.capa
       ? `<img src="${projeto.capa}" alt="${projeto.titulo}" loading="lazy" />`
       : (window.gerarCapa ? window.gerarCapa(projeto) : '');
 
     return `
-      <a class="project-card" href="projeto.html?id=${projeto.id}" aria-label="Ver detalhes do projeto ${projeto.titulo}">
+      <a class="project-card" href="projeto.html?id=${projeto.id}" aria-label="${text('cardDetails').replace('{title}', projeto.titulo)}">
         <div class="project-card__media">${media}</div>
         <div class="project-card__body">
           <div class="project-card__meta">
-            <span>${projeto.categoria === 'mobile' ? 'Mobile' : 'Backend'}</span>
+            <span>${projeto.categoria === 'mobile' ? text('mobile') : text('backend')}</span>
             <span class="arrow" aria-hidden="true">→</span>
           </div>
           <h3>${projeto.titulo}</h3>
@@ -83,7 +154,10 @@
     const el = document.querySelector('[data-typewriter]');
     if (!el) return;
 
-    const phrases = ['Flutter', 'C# / .NET', 'APIs REST', 'Clean Architecture'];
+    clearTimeout(window.portfolioTypewriterTimer);
+    const phrases = language === 'en'
+      ? ['Flutter', 'C# / .NET', 'REST APIs', 'Clean Architecture']
+      : ['Flutter', 'C# / .NET', 'APIs REST', 'Clean Architecture'];
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (reduceMotion) {
@@ -107,7 +181,7 @@
 
       if (!deleting && charIndex === current.length) {
         deleting = true;
-        setTimeout(tick, 1200);
+        window.portfolioTypewriterTimer = setTimeout(tick, 1200);
         return;
       }
 
@@ -117,7 +191,7 @@
       }
 
       const speed = deleting ? 55 : 110;
-      setTimeout(tick, speed);
+      window.portfolioTypewriterTimer = setTimeout(tick, speed);
     }
 
     tick();
@@ -144,20 +218,21 @@
 
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
-    const projeto = projetos.find((item) => item.id === id);
+    const sourceProject = projetos.find((item) => item.id === id);
 
-    if (!projeto) {
-      document.title = 'Projeto não encontrado | Raony Lino';
+    if (!sourceProject) {
+      document.title = `${text('notFoundTitle')} | Raony Lino`;
       root.innerHTML = `
         <div class="empty-state">
-          <h1>Projeto não encontrado</h1>
-          <p>O projeto solicitado não está disponível no momento.</p>
-          <a class="button button-primary" href="index.html#projetos">Voltar aos projetos</a>
+          <h1>${text('notFoundTitle')}</h1>
+          <p>${text('notFoundText')}</p>
+          <a class="button button-primary" href="index.html#projetos">${text('backHome')}</a>
         </div>
       `;
       return;
     }
 
+    const projeto = localizedProject(sourceProject);
     const title = `${projeto.titulo} | Raony Lino`;
     document.title = title;
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -167,7 +242,7 @@
     const ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) ogDescription.setAttribute('content', projeto.resumo);
 
-    const index = projetos.indexOf(projeto);
+    const index = projetos.indexOf(sourceProject);
     const prev = index > 0 ? projetos[index - 1] : null;
     const next = index < projetos.length - 1 ? projetos[index + 1] : null;
 
@@ -177,7 +252,7 @@
     if (projeto.oQueFaz && projeto.oQueFaz.length) {
       sections.push(`
         <section class="detail-section">
-          <h2>O que o projeto faz</h2>
+          <h2>${text('detailWhatItDoes')}</h2>
           <ul>${projeto.oQueFaz.map((item) => `<li>${item}</li>`).join('')}</ul>
         </section>
       `);
@@ -186,7 +261,7 @@
     if (projeto.tecnologias && projeto.tecnologias.length) {
       sections.push(`
         <section class="detail-section">
-          <h2>Tecnologias</h2>
+          <h2>${text('detailTechnologies')}</h2>
           <ul class="detail-techs">${projeto.tecnologias.map((item) => `<li>${item}</li>`).join('')}</ul>
         </section>
       `);
@@ -195,7 +270,7 @@
     if (projeto.arquitetura) {
       sections.push(`
         <section class="detail-section">
-          <h2>Arquitetura</h2>
+          <h2>${text('detailArchitecture')}</h2>
           <p>${projeto.arquitetura}</p>
         </section>
       `);
@@ -204,7 +279,7 @@
     if (projeto.comoFunciona && projeto.comoFunciona.length) {
       sections.push(`
         <section class="detail-section">
-          <h2>Como funciona</h2>
+          <h2>${text('detailHowItWorks')}</h2>
           <ol>${projeto.comoFunciona.map((item) => `<li>${item}</li>`).join('')}</ol>
         </section>
       `);
@@ -213,7 +288,7 @@
     if (projeto.desafios) {
       sections.push(`
         <section class="detail-section">
-          <h2>Desafios e aprendizados</h2>
+          <h2>${text('detailChallenges')}</h2>
           <p>${projeto.desafios}</p>
         </section>
       `);
@@ -222,23 +297,23 @@
     if (projeto.proximosPassos && projeto.proximosPassos.length) {
       sections.push(`
         <section class="detail-section">
-          <h2>Próximos passos</h2>
+          <h2>${text('detailNextSteps')}</h2>
           <ul>${projeto.proximosPassos.map((item) => `<li>${item}</li>`).join('')}</ul>
         </section>
       `);
     }
 
     root.innerHTML = `
-      <a class="back-link" href="index.html#projetos">← Voltar aos projetos</a>
+      <a class="back-link" href="index.html#projetos">${text('detailBack')}</a>
       <article class="project-detail">
         <header class="detail-header">
           <div>
-            <p class="project-detail__eyebrow">${projeto.categoria === 'mobile' ? 'Mobile' : 'Backend'}</p>
+            <p class="project-detail__eyebrow">${projeto.categoria === 'mobile' ? text('detailCategoryMobile') : text('detailCategoryBackend')}</p>
             <h1>${projeto.titulo}</h1>
           </div>
           <div class="detail-actions">
-            ${projeto.github ? `<a class="button button-primary" href="${projeto.github}" target="_blank" rel="noopener">Ver código no GitHub</a>` : ''}
-            ${projeto.site ? `<a class="button button-secondary" href="${projeto.site}" target="_blank" rel="noopener">Ver site/app</a>` : ''}
+            ${projeto.github ? `<a class="button button-primary" href="${projeto.github}" target="_blank" rel="noopener">${text('detailGithub')}</a>` : ''}
+            ${projeto.site ? `<a class="button button-secondary" href="${projeto.site}" target="_blank" rel="noopener">${text('detailSite')}</a>` : ''}
           </div>
         </header>
         <div class="project-detail__cover">${cover}</div>
@@ -246,15 +321,17 @@
           <div class="project-detail__summary">${projeto.resumo}</div>
           ${sections.join('')}
         </div>
-        <nav class="project-detail__nav" aria-label="Navegação de projetos">
-          ${prev ? `<a href="projeto.html?id=${prev.id}">← Projeto anterior</a>` : '<span></span>'}
-          ${next ? `<a href="projeto.html?id=${next.id}">Próximo projeto →</a>` : '<span></span>'}
+        <nav class="project-detail__nav" aria-label="${text('detailNavLabel')}">
+          ${prev ? `<a href="projeto.html?id=${prev.id}">${text('previousProject')}</a>` : '<span></span>'}
+          ${next ? `<a href="projeto.html?id=${next.id}">${text('nextProject')}</a>` : '<span></span>'}
         </nav>
       </article>
     `;
   }
 
   function init() {
+    applyTranslations();
+    initLanguageSwitch();
     initNav();
     initTypewriter();
     initCurriculoButton();

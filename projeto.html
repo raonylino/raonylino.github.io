@@ -14,22 +14,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261013-1" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261014-1" />
 </head>
 
 <body data-page="detail">
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <a class="skip-link" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
 
   <header class="site-header">
-    <nav class="nav container" aria-label="Navegação principal">
-      <a class="brand" href="index.html" aria-label="Voltar para a página inicial">RL</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+    <nav class="nav container" aria-label="Navegação principal" data-i18n-aria-label="navLabel">
+      <a class="brand" href="index.html" aria-label="Voltar para a página inicial" data-i18n-aria-label="home">RL</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
+        data-i18n="menu">Menu</button>
       <div class="nav-menu" id="nav-menu">
-        <a class="nav-link" href="index.html#projetos">Projetos</a>
-        <a class="nav-link" href="index.html#capacidades">Capacidades</a>
-        <a class="nav-link" href="index.html#experiencia">Experiência</a>
-        <a class="nav-link" href="index.html#contato">Contato</a>
-        <a class="button button-primary nav-button" href="mailto:raony_lino@hotmail.com">Vamos conversar</a>
+        <a class="nav-link" href="index.html#projetos" data-i18n="navProjects">Projetos</a>
+        <a class="nav-link" href="index.html#capacidades" data-i18n="navCapabilities">Capacidades</a>
+        <a class="nav-link" href="index.html#experiencia" data-i18n="navExperience">Experiência</a>
+        <a class="nav-link" href="index.html#contato" data-i18n="navContact">Contato</a>
+        <a class="button button-primary nav-button" href="mailto:raony_lino@hotmail.com" data-i18n="talk">Vamos
+          conversar</a>
+      </div>
+      <div class="language-switch" role="group" aria-label="Idioma da página" data-i18n-aria-label="languageGroup">
+        <button class="language-button is-active" type="button" data-language="pt" aria-pressed="true">PT</button>
+        <button class="language-button" type="button" data-language="en" aria-pressed="false">EN</button>
       </div>
     </nav>
   </header>
@@ -41,12 +47,13 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2026 Raony Lino</div>
+    <div class="container" data-i18n="footer">© 2026 Raony Lino</div>
   </footer>
 
-  <script src="assets/js/projects.js?v=20261013-1"></script>
-  <script src="assets/js/cover.js?v=20261013-1"></script>
-  <script src="assets/js/main.js?v=20261013-1"></script>
+  <script src="assets/js/projects.js?v=20261014-1"></script>
+  <script src="assets/js/cover.js?v=20261014-2"></script>
+  <script src="assets/js/i18n.js?v=20261014-1"></script>
+  <script src="assets/js/main.js?v=20261014-1"></script>
 </body>
 
 </html>

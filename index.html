@@ -15,22 +15,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261013-2" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261014-1" />
 </head>
 
 <body>
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <a class="skip-link" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
 
   <header class="site-header">
-    <nav class="nav container" aria-label="Navegação principal">
-      <a class="brand" href="#top" aria-label="Início">RL</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+    <nav class="nav container" aria-label="Navegação principal" data-i18n-aria-label="navLabel">
+      <a class="brand" href="#top" aria-label="Início" data-i18n-aria-label="home">RL</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
+        data-i18n="menu">Menu</button>
       <div class="nav-menu" id="nav-menu">
-        <a class="nav-link" href="#projetos">Projetos</a>
-        <a class="nav-link" href="#capacidades">Capacidades</a>
-        <a class="nav-link" href="#experiencia">Experiência</a>
-        <a class="nav-link" href="#contato">Contato</a>
-        <a class="button button-primary nav-button" href="mailto:raony_lino@hotmail.com">Vamos conversar</a>
+        <a class="nav-link" href="#projetos" data-i18n="navProjects">Projetos</a>
+        <a class="nav-link" href="#capacidades" data-i18n="navCapabilities">Capacidades</a>
+        <a class="nav-link" href="#experiencia" data-i18n="navExperience">Experiência</a>
+        <a class="nav-link" href="#contato" data-i18n="navContact">Contato</a>
+        <a class="button button-primary nav-button" href="mailto:raony_lino@hotmail.com" data-i18n="talk">Vamos
+          conversar</a>
+      </div>
+      <div class="language-switch" role="group" aria-label="Idioma da página" data-i18n-aria-label="languageGroup">
+        <button class="language-button is-active" type="button" data-language="pt" aria-pressed="true">PT</button>
+        <button class="language-button" type="button" data-language="en" aria-pressed="false">EN</button>
       </div>
     </nav>
   </header>
@@ -39,22 +45,23 @@
     <section class="hero" id="top">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Desenvolvedor Mobile e Backend</p>
+          <p class="eyebrow" data-i18n="heroEyebrow">Desenvolvedor Mobile e Backend</p>
           <h1>RAONY LINO</h1>
           <p class="typewriter" data-typewriter aria-live="polite"></p>
-          <p class="hero-text">Desenvolvo apps Flutter e APIs em C#/.NET com código limpo e bem estruturado. Já
+          <p class="hero-text" data-i18n="heroText">Desenvolvo apps Flutter e APIs em C#/.NET com código limpo e bem
+            estruturado. Já
             publiquei aplicativos nas lojas, com centenas de usuários ativos.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#projetos">Ver projetos</a>
+            <a class="button button-primary" href="#projetos" data-i18n="viewProjects">Ver projetos</a>
             <a id="curriculo-btn" class="button button-secondary" href="assets/doc/Curriculo_Raony.pdf" target="_blank"
-              rel="noopener">Baixar currículo (PDF)</a>
+              rel="noopener" data-i18n="resume">Baixar currículo (PDF)</a>
           </div>
-          <div class="hero-status">Aberto a oportunidades · São Paulo, SP</div>
+          <div class="hero-status" data-i18n="status">Aberto a oportunidades · São Paulo, SP</div>
         </div>
 
         <div class="hero-visual">
-          <div class="portrait-shell" aria-label="Avatar de Raony Lino">
-            <img class="portrait-image" src="assets/img/raonyLino.jpg" alt="Raony Lino" />
+          <div class="portrait-shell" aria-label="Avatar de Raony Lino" data-i18n-aria-label="portrait">
+            <img class="portrait-image" src="assets/img/raonyLino.jpg" alt="Raony Lino" data-i18n-alt="portrait" />
           </div>
         </div>
       </div>
@@ -64,19 +71,19 @@
       <div class="container stats-grid">
         <div class="stat-item">
           <strong>3+</strong>
-          <span>anos de experiência</span>
+          <span data-i18n="yearsExperience">anos de experiência</span>
         </div>
         <div class="stat-item">
           <strong>8</strong>
-          <span>apps Flutter</span>
+          <span data-i18n="flutterApps">apps Flutter</span>
         </div>
         <div class="stat-item">
           <strong>4</strong>
-          <span>APIs de backend</span>
+          <span data-i18n="backendApis">APIs de backend</span>
         </div>
         <div class="stat-item">
           <strong>700</strong>
-          <span>usuários no HRV4Life</span>
+          <span data-i18n="hrvUsers">usuários no HRV4Life</span>
         </div>
       </div>
     </section>
@@ -85,23 +92,23 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-kicker">Featured work</p>
-            <h2>Trabalhos em destaque</h2>
+            <p class="section-kicker" data-i18n="featuredKicker">Featured work</p>
+            <h2 data-i18n="featuredTitle">Trabalhos em destaque</h2>
           </div>
-          <a class="section-link" href="#todos-projetos">Ver todos os projetos →</a>
+          <a class="section-link" href="#todos-projetos" data-i18n="allProjectsLink">Ver todos os projetos →</a>
         </div>
 
         <div id="featured-projects" class="featured-grid"></div>
 
         <div id="todos-projetos" class="section-header">
           <div>
-            <p class="section-kicker">Projetos</p>
-            <h2>Todos os projetos</h2>
+            <p class="section-kicker" data-i18n="projectsKicker">Projetos</p>
+            <h2 data-i18n="allProjects">Todos os projetos</h2>
           </div>
-          <div class="filters" role="tablist" aria-label="Filtrar projetos">
-            <button class="filter-button is-active" data-filter="all" type="button">Todos</button>
-            <button class="filter-button" data-filter="mobile" type="button">Mobile</button>
-            <button class="filter-button" data-filter="backend" type="button">Backend</button>
+          <div class="filters" role="tablist" aria-label="Filtrar projetos" data-i18n-aria-label="filterLabel">
+            <button class="filter-button is-active" data-filter="all" type="button" data-i18n="filterAll">Todos</button>
+            <button class="filter-button" data-filter="mobile" type="button" data-i18n="mobile">Mobile</button>
+            <button class="filter-button" data-filter="backend" type="button" data-i18n="backend">Backend</button>
           </div>
         </div>
 
@@ -113,8 +120,8 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-kicker">Capacidades</p>
-            <h2>O que eu faço</h2>
+            <p class="section-kicker" data-i18n="capabilitiesKicker">Capacidades</p>
+            <h2 data-i18n="capabilitiesTitle">O que eu faço</h2>
           </div>
         </div>
 
@@ -147,7 +154,7 @@
                 <path d="M7 18 3 6h18l-4 12H7Zm0 0h10M9 9h6" />
               </svg>
             </div>
-            <h3>Arquitetura</h3>
+            <h3 data-i18n="architecture">Arquitetura</h3>
             <p>Clean Architecture, SOLID, DDD, MVVM.</p>
           </article>
 
@@ -157,7 +164,7 @@
                 <path d="M4 18V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10M8 10h8M8 14h5" />
               </svg>
             </div>
-            <h3>Dados</h3>
+            <h3 data-i18n="data">Dados</h3>
             <p>MySQL, SQLite, Firestore, Supabase, Hive.</p>
           </article>
 
@@ -167,8 +174,8 @@
                 <path d="M5 12h14M12 5v14" />
               </svg>
             </div>
-            <h3>Qualidade e processo</h3>
-            <p>Git/GitFlow, code review, Scrum/Kanban, testes básicos.</p>
+            <h3 data-i18n="quality">Qualidade e processo</h3>
+            <p data-i18n="qualityDescription">Git/GitFlow, code review, Scrum/Kanban, testes básicos.</p>
           </article>
 
           <article class="capability-card">
@@ -178,7 +185,7 @@
                 <path d="M18 6h2v2" />
               </svg>
             </div>
-            <h3>Publicação</h3>
+            <h3 data-i18n="publishing">Publicação</h3>
             <p>Google Play e App Store.</p>
           </article>
         </div>
@@ -189,8 +196,8 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-kicker">Stack</p>
-            <h2>Ferramentas e tecnologias</h2>
+            <p class="section-kicker" data-i18n="stackKicker">Stack</p>
+            <h2 data-i18n="toolsTitle">Ferramentas e tecnologias</h2>
           </div>
         </div>
 
@@ -247,13 +254,13 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-kicker">Experiência</p>
-            <h2>Experiência e formação</h2>
+            <p class="section-kicker" data-i18n="experienceKicker">Experiência</p>
+            <h2 data-i18n="experienceTitle">Experiência e formação</h2>
           </div>
         </div>
 
         <div class="timeline">
-          <article class="timeline-item">
+          <article class="timeline-item" data-i18n-html="techmize">
             <div class="timeline-item__meta"><span>TechMize</span> · <span>Tempo integral</span> ·
               <span>mar. de 2025 - nov. de 2025</span> · <span>9 meses</span>
             </div>
@@ -273,7 +280,7 @@
             </ul>
           </article>
 
-          <article class="timeline-item">
+          <article class="timeline-item" data-i18n-html="iatrix">
             <div class="timeline-item__meta"><span>iatrix</span> · <span>Tempo integral</span> ·
               <span>ago. de 2024 - fev. de 2025</span> · <span>7 meses</span>
             </div>
@@ -295,7 +302,7 @@
             </ul>
           </article>
 
-          <article class="timeline-item">
+          <article class="timeline-item" data-i18n-html="hrv4life">
             <div class="timeline-item__meta"><span>HRV4Life</span> · <span>Tempo integral</span> ·
               <span>out. de 2022 - jul. de 2024</span> · <span>1 ano 10 meses</span>
             </div>
@@ -318,11 +325,11 @@
             </ul>
           </article>
 
-          <article class="timeline-item">
+          <article class="timeline-item" data-i18n-html="education">
             <div class="timeline-item__meta"><span>Formação</span></div>
-            <h3>Bacharelado em Ciência da Computação</h3>
+            <h3 data-i18n="degree">Bacharelado em Ciência da Computação</h3>
             <p>PUC Minas, 2019–2022.</p>
-            <p>Estudos contínuos: Alura e Academia do Flutter.</p>
+            <p data-i18n="ongoingStudy">Estudos contínuos: Alura e Academia do Flutter.</p>
           </article>
         </div>
       </div>
@@ -332,8 +339,8 @@
       <div class="container">
         <div class="contact-card">
           <div>
-            <p class="section-kicker">Contato</p>
-            <h2>Vamos construir algo juntos.</h2>
+            <p class="section-kicker" data-i18n="contactKicker">Contato</p>
+            <h2 data-i18n="contactTitle">Vamos construir algo juntos.</h2>
           </div>
           <ul class="contact-list">
             <li><a href="mailto:raony_lino@hotmail.com">✉ raony_lino@hotmail.com</a></li>
@@ -349,12 +356,13 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2026 Raony Lino</div>
+    <div class="container" data-i18n="footer">© 2026 Raony Lino</div>
   </footer>
 
-  <script src="assets/js/projects.js?v=20261013-2"></script>
-  <script src="assets/js/cover.js?v=20261013-2"></script>
-  <script src="assets/js/main.js?v=20261013-2"></script>
+  <script src="assets/js/projects.js?v=20261014-1"></script>
+  <script src="assets/js/cover.js?v=20261014-2"></script>
+  <script src="assets/js/i18n.js?v=20261014-1"></script>
+  <script src="assets/js/main.js?v=20261014-1"></script>
 </body>
 
 </html>

@@ -61,9 +61,10 @@
     const tags = (projeto.tags || []).slice(0, 3);
     const icon = projeto.icone || 'phone';
     const frame = projeto.categoria === 'backend' ? createBackendFrame(seed, accent, textColor) : createMobileFrame(seed, accent, textColor);
+    const coverLabel = document.documentElement.lang === 'en' ? 'Project cover' : 'Capa do projeto';
 
     return `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Capa do projeto ${projeto.titulo}">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="${coverLabel} ${projeto.titulo}">
         <defs>
           <linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="hsl(${h} ${Math.min(80, s + 10)}% ${Math.min(26, l + 8)}%)"/>
