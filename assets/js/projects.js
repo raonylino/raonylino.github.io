@@ -37,7 +37,7 @@ window.PROJETOS = [
       'Mais relatórios e filtros financeiros',
       'Melhorias de exportação e importação'
     ],
-    galeria: []
+    galeria: ['assets/img/medPlanner/medplanner_1.jpeg', 'assets/img/medPlanner/medplanner_2.jpeg', 'assets/img/medPlanner/medplanner_3.jpeg', 'assets/img/medPlanner/medplanner_4.jpeg', 'assets/img/medPlanner/medplanner_5.jpeg']
   },
   {
     id: 'metrosp',
@@ -71,7 +71,7 @@ window.PROJETOS = [
     ],
     desafios: 'Estruturar a lógica de posicionamento e de proximidade geográfica em uma experiência leve e confiável, mesmo com dados locais e remotos em diferentes estados de conexão.',
     proximosPassos: ['Integração com Google Maps', 'Notificações de proximidade', 'Histórico de trajetos', 'Dark mode', 'Suporte offline completo', 'Múltiplas cidades'],
-    galeria: []
+    galeria: ['assets/img/metroSP/metroSP_1.jpeg', 'assets/img/metroSP/metroSP_2.jpeg', 'assets/img/metroSP/metroSP_3.jpeg', 'assets/img/metroSP/metroSP_4.jpeg', 'assets/img/metroSP/metroSP_5.jpeg']
   },
   {
     id: 'pronta-entrega',

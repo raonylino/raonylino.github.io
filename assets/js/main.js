@@ -303,6 +303,21 @@
       `);
     }
 
+    if (projeto.galeria && projeto.galeria.length) {
+      sections.push(`
+        <section class="detail-section">
+          <h2>${text('detailGallery')}</h2>
+          <div class="project-gallery">
+            ${projeto.galeria.map((image, imageIndex) => `
+              <button class="project-gallery__item" type="button" data-gallery-index="${imageIndex}" aria-label="${text('galleryOpen')} ${imageIndex + 1}">
+                <img src="${image}" alt="${text('galleryImage')} ${imageIndex + 1}" loading="lazy" />
+              </button>
+            `).join('')}
+          </div>
+        </section>
+      `);
+    }
+
     root.innerHTML = `
       <a class="back-link" href="index.html#projetos">${text('detailBack')}</a>
       <article class="project-detail">
@@ -326,7 +341,77 @@
           ${next ? `<a href="projeto.html?id=${next.id}">${text('nextProject')}</a>` : '<span></span>'}
         </nav>
       </article>
+      ${projeto.galeria && projeto.galeria.length ? `
+        <div class="gallery-viewer" role="dialog" aria-modal="true" aria-label="${text('detailGallery')}" aria-hidden="true">
+          <button class="gallery-viewer__close" type="button" aria-label="${text('galleryClose')}">&times;</button>
+          ${projeto.galeria.length > 1 ? `
+            <button class="gallery-viewer__nav gallery-viewer__previous" type="button" aria-label="${text('galleryPrevious')}">&#10094;</button>
+          ` : ''}
+          <figure class="gallery-viewer__figure">
+            <img class="gallery-viewer__image" src="" alt="" />
+            ${projeto.galeria.length > 1 ? '<figcaption class="gallery-viewer__counter"></figcaption>' : ''}
+          </figure>
+          ${projeto.galeria.length > 1 ? `
+            <button class="gallery-viewer__nav gallery-viewer__next" type="button" aria-label="${text('galleryNext')}">&#10095;</button>
+          ` : ''}
+        </div>
+      ` : ''}
     `;
+
+    if (projeto.galeria && projeto.galeria.length) {
+      initGalleryViewer(projeto.galeria);
+    }
+  }
+
+  function initGalleryViewer(images) {
+    const viewer = document.querySelector('.gallery-viewer');
+    const viewerImage = viewer?.querySelector('.gallery-viewer__image');
+    if (!viewer || !viewerImage) return;
+    document.body.append(viewer);
+
+    let activeIndex = 0;
+    let previousFocus = null;
+
+    function showImage(index) {
+      activeIndex = (index + images.length) % images.length;
+      viewerImage.src = images[activeIndex];
+      viewerImage.alt = `${text('galleryImage')} ${activeIndex + 1}`;
+      const counter = viewer.querySelector('.gallery-viewer__counter');
+      if (counter) counter.textContent = `${activeIndex + 1} / ${images.length}`;
+    }
+
+    function closeViewer() {
+      viewer.classList.remove('is-open');
+      viewer.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('gallery-viewer-open');
+      previousFocus?.focus();
+    }
+
+    function handleKeydown(event) {
+      if (!viewer.classList.contains('is-open')) return;
+      if (event.key === 'Escape') closeViewer();
+      if (event.key === 'ArrowLeft' && images.length > 1) showImage(activeIndex - 1);
+      if (event.key === 'ArrowRight' && images.length > 1) showImage(activeIndex + 1);
+    }
+
+    document.querySelectorAll('[data-gallery-index]').forEach((button) => {
+      button.addEventListener('click', () => {
+        previousFocus = button;
+        showImage(Number(button.dataset.galleryIndex));
+        viewer.classList.add('is-open');
+        viewer.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('gallery-viewer-open');
+        viewer.querySelector('.gallery-viewer__close').focus();
+      });
+    });
+
+    viewer.querySelector('.gallery-viewer__close').addEventListener('click', closeViewer);
+    viewer.querySelector('.gallery-viewer__previous')?.addEventListener('click', () => showImage(activeIndex - 1));
+    viewer.querySelector('.gallery-viewer__next')?.addEventListener('click', () => showImage(activeIndex + 1));
+    viewer.addEventListener('click', (event) => {
+      if (event.target === viewer) closeViewer();
+    });
+    viewer.addEventListener('keydown', handleKeydown);
   }
 
   function init() {

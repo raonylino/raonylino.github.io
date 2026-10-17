@@ -812,6 +812,27 @@ button {
     flex-direction: column;
     align-items: stretch;
   }
+
+  .gallery-viewer {
+    gap: 10px;
+    padding: 64px 12px 28px;
+  }
+
+  .gallery-viewer__image {
+    max-width: calc(100vw - 100px);
+    max-height: calc(100vh - 130px);
+  }
+
+  .gallery-viewer__close,
+  .gallery-viewer__nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .gallery-viewer__close {
+    top: 12px;
+    right: 12px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -901,6 +922,109 @@ button {
 
 .detail-section {
   margin-top: 28px;
+}
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.project-gallery__item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.project-gallery__item:hover {
+  transform: translateY(-3px);
+  border-color: var(--pink);
+}
+
+.project-gallery__item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+}
+
+.gallery-viewer {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 64px 72px;
+  background: rgba(5, 6, 10, 0.94);
+  backdrop-filter: blur(10px);
+}
+
+.gallery-viewer.is-open {
+  display: flex;
+}
+
+.gallery-viewer__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+}
+
+.gallery-viewer__image {
+  width: auto;
+  max-width: min(78vw, 1100px);
+  max-height: calc(100vh - 120px);
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.gallery-viewer__counter {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.gallery-viewer__close,
+.gallery-viewer__nav {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.gallery-viewer__close:hover,
+.gallery-viewer__nav:hover {
+  background: var(--pink-strong);
+}
+
+.gallery-viewer__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+}
+
+body.gallery-viewer-open {
+  overflow: hidden;
 }
 
 .detail-section h2 {
