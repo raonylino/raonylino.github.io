@@ -1,5 +1,45 @@
 window.PROJETOS = [
   {
+    id: 'MedPlanner',
+    titulo: 'MedPlanner',
+    categoria: 'mobile',
+    resumo: 'App Flutter de planejamento financeiro pessoal, 100% offline, com dados locais em SQLite.',
+    tags: ['Flutter', 'Dart', 'SQLite'],
+    destaque: true,
+    cor: 'hsl(24 72% 58%)',
+    icone: 'mobile',
+    github: 'https://github.com/raonylino/MedPlanner',
+    site: '',
+    capa: 'assets/img/medPlanner.jpg',
+    oQueFaz: [
+      'Painel mensal com entradas líquidas projetadas, despesas e cartões',
+      'Planejamento por categoria com subtotal, percentual do mês e marcação de pagamento',
+      'Organização de recebimentos em abas (Trabalhados e Recebidos) com cadastro reutilizável de serviços',
+      'Regras de investimento percentuais ou fixas',
+      'Gestão de cartões com limite, categorias e compras parceladas',
+      'Metas agrupadas por categoria, com descrição, quantidade e subtotal',
+      'Exportação em Excel e backup/restauração em JSON'
+    ],
+    tecnologias: ['Flutter', 'Dart', 'SQLite', 'Excel', 'Share Plus', 'Circle Nav Bar'],
+    arquitetura: 'Aplicação Flutter organizada em lib/core (banco, temas e utilitários) e lib/features (módulos da aplicação), com persistência local em SQLite e funcionamento totalmente offline, sem chamadas de rede ou integração bancária.',
+    comoFunciona: [
+      'O seletor mensal em carrossel permite navegar entre meses anteriores e seguintes',
+      'Receitas, despesas, cartões e metas são cadastrados e organizados por categoria em cada módulo',
+      'O app calcula parcelas em aberto e libera o limite do cartão após o pagamento',
+      'Os dados ficam no SQLite do dispositivo; backup JSON e planilha Excel são exportados pelo compartilhamento do sistema',
+      'A restauração de backup substitui os dados locais atuais'
+    ],
+    desafios: 'Modelar o planejamento mensal com receitas, cartões parcelados e metas de forma consistente em um banco local, mantendo tudo offline e com exportação/restauração segura dos dados.',
+    proximosPassos: [
+      'Criptografia do banco SQLite',
+      'Autenticação por biometria ou PIN',
+      'Refinamento de UX',
+      'Mais relatórios e filtros financeiros',
+      'Melhorias de exportação e importação'
+    ],
+    galeria: []
+  },
+  {
     id: 'metrosp',
     titulo: 'MetroSP',
     categoria: 'mobile',
@@ -160,26 +200,7 @@ window.PROJETOS = [
     proximosPassos: ['Refinamento do domínio', 'Mais endpoints', 'Cobertura de testes'],
     galeria: []
   },
-  // {
-  //   id: 'figurinha-copa',
-  //   titulo: 'API de figurinhas da Copa',
-  //   categoria: 'backend',
-  //   resumo: 'API para um colecionador de figurinhas da Copa.',
-  //   tags: ['API', 'C#'],
-  //   destaque: false,
-  //   cor: 'hsl(24 72% 58%)',
-  //   icone: 'api',
-  //   github: 'https://github.com/raonylino/backend-figurinha',
-  //   site: '',
-  //   capa: '',
-  //   oQueFaz: ['API para colecionador de figurinhas da Copa'],
-  //   tecnologias: ['API'],
-  //   arquitetura: 'Aplicação focada em disponibilizar endpoints para o domínio de colecionador.',
-  //   comoFunciona: ['A API atende operações do colecionador'],
-  //   desafios: 'Organizar a estrutura do domínio e a API de forma simples.',
-  //   proximosPassos: ['Mais endpoints', 'Melhor organização de dados'],
-  //   galeria: []
-  // },
+
   // {
   //   id: 'escola-ingles',
   //   titulo: 'Escola de inglês',
